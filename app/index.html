@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta>
+    <meta>
+    <title>Cliave | Soluções Digitais</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://fb.me/react-with-addons-0.14.8.js"></script>
+    <script src="https://fb.me/react-dom-0.14.8.js"></script>
+    <body>
+        <div class="container">
+            <h1>Cliave | Soluções Digitais</h1>
+        </div>
+
+        <div id="page"></div>
+        <div id="app"></div>
+        
+        <script src="./scripts/app.js"></script>
+        <script src="../node_modules/firebase/firebase.js"></script>
+        <script src="../node_modules/reactfire/dist/reactfire.min.js"></script>
+
+        <script src="scripts/components.js"></script>
+        <script src="scripts/main.js"></script>
+        <script>
+            function loadJSON(callback) {   
+
+                var xobj = new XMLHttpRequest();
+                    xobj.overrideMimeType("application/json");
+                    xobj.open('GET', 'http://gd.geobytes.com/GetCityDetails?callback=?', true); // Replace 'my_data' with the path to your file
+                    xobj.onreadystatechange = function (data) {
+                        if (xobj.readyState == 4 && xobj.status == "200") {
+                        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                            console.log(JSON.stringify(data, null, 2));
+                            callback(xobj.responseText);
+                        }
+                };
+                xobj.send(null);  
+            }
+            loadJSON();
+            /*$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+                console.log(JSON.stringify(data, null, 2));
+            });*/
+        </script>
+    </body>
+</head>
+</html>
